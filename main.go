@@ -16,6 +16,9 @@ func init(){
 }
 
 func main() {
+	  //beego.BConfig.WebConfig.DirectoryIndex = true
+		beego.SetStaticPath("/images","images")
+
 		orm.RunCommand()
 		beego.Run()
 }

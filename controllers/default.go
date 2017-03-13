@@ -40,7 +40,7 @@ func (c *MainController) Get() {
 
 
 	c.Data["Version"]= sv
-	c.Data["Email"] = "astaxie@gmail.com"
+	c.Data["Email"] = "fts-support@cern.ch"
 	c.TplName = "index.tpl"
 }
 
