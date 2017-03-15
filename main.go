@@ -1,24 +1,24 @@
 package main
 
 import (
-	_ "github.com/lib/pq"
 	_ "flutter-rest/routers"
+	"fmt"
+
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-
+	_ "github.com/lib/pq"
 )
 
+func init() {
 
-func init(){
-    orm.RegisterDriver("postgres", orm.DRPostgres)
-	  orm.RegisterDataBase("default", "postgres", "user=marsuaga password=chikitina dbname=mysite_development sslmode=disable")
+	orm.RegisterDriver("postgres", orm.DRPostgres)
+	orm.RegisterDataBase("default", "postgres", fmt.Sprintf("user=%s password=%s dbname=%s sslmode=%s",
+		beego.AppConfig.String("pgUser"), beego.AppConfig.String("pgPass"), beego.AppConfig.String("pgDB"), beego.AppConfig.String("pgSslMode")))
 
 }
 
 func main() {
-	  //beego.BConfig.WebConfig.DirectoryIndex = true
-		beego.SetStaticPath("/images","images")
 
-		orm.RunCommand()
-		beego.Run()
+	orm.RunCommand()
+	beego.Run()
 }

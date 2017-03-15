@@ -2,13 +2,14 @@ package models
 
 import (
 	"fmt"
+
 	"github.com/astaxie/beego/orm"
 )
 
 type SchemaVersion struct {
-	Major int `orm:"pk"`
-	Minor int
-	Patch int
+	Major   int `orm:"pk"`
+	Minor   int
+	Patch   int
 	Message string
 }
 
@@ -20,7 +21,7 @@ func (sv *SchemaVersion) TableCPK() []string {
 }
 
 func (sv SchemaVersion) String() string {
-   return fmt.Sprintf("Version <%d %d %d %s>", sv.Major, sv.Minor, sv.Patch, sv.Message)
+	return fmt.Sprintf("<%d.%d.%d %s>", sv.Major, sv.Minor, sv.Patch, sv.Message)
 }
 
 func init() {

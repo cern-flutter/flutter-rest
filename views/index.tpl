@@ -26,7 +26,7 @@
     }
 
     .logo {
-      background-image: url("images/FLUTTER-REST.png");
+      background-image: url("/static/img/FLUTTER-REST.png");
       background-repeat: no-repeat;
       -webkit-background-size: 100px 100px;
       background-size: 100px 100px;
@@ -80,8 +80,10 @@
   </header>
   <footer>
     <div class="author">
+      API Version:
+      <a href="http://{{.APIVersion}}">{{.APIVersion}}</a> /
       Schema Version:
-      <a href="http://{{.Version}}">{{.Version}}</a> /
+      <a href="http://{{.SchemaVersion}}">{{.SchemaVersion}}</a> /
       Contact me:
       <a class="email" href="mailto:{{.Email}}">{{.Email}}</a>
     </div>
