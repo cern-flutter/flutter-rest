@@ -36,7 +36,7 @@ func (this *baseController) Prepare() {
 	}
 	var p proxy.X509Proxy
 	if err := p.DecodeFromFile(proxyPath); err != nil {
-		fmt.Println("Error Decode")
+		beego.Error("Error Decode")
 	}
 
 	verifyOptions := proxy.VerifyOptions{
@@ -47,14 +47,14 @@ func (this *baseController) Prepare() {
 	crls, _ := strconv.ParseBool(beego.AppConfig.String("crls"))
 
 	if verifyOptions.Roots, err = proxy.LoadCAPath(capath, crls); err != nil {
-		fmt.Println("Failed to load the CA Path: ", err)
+		beego.Debug("Failed to load the CA Path: ", err)
 		return
 	}
 
 	if err = p.Verify(verifyOptions); err != nil {
-		fmt.Println("Your proxy doesn't seem valid ", err)
+		beego.Debug("Your proxy doesn't seem valid ", err)
 	} else {
-		fmt.Println("Your proxy seems valid")
+		beego.Debug("Your proxy seems valid")
 	}
 
 	if app, ok := this.AppController.(NestPreparer); ok {
