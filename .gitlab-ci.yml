@@ -1,4 +1,10 @@
 image: golang:1.7
 
 test:
-    script: "go test -v tests/* -cover"
+    script:
+      - go get
+      - mkdir -p "$GOPATH/src/gitlab.cern.ch/flutter"
+      - ln -sfv "$(pwd -P)" "$GOPATH/src/gitlab.cern.ch/flutter"
+      - cd "$GOPATH/src/gitlab.cern.ch/flutter/flutter-rest"
+      - go get -t
+      - go test -v tests/verify_test.go -cover
