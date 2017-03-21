@@ -3,5 +3,9 @@ image: golang:1.7
 test:
     script:
       - go vet
+      - echo "$GOPATH"
+      - mkdir -p "$GOPATH/src/gitlab.cern.ch/flutter"
+      - ln -sfv "$(pwd -P)" "$GOPATH/src/gitlab.cern.ch/flutter"
+      - cd "$GOPATH/src/gitlab.cern.ch/flutter/futter-rest"
       - go get -t
       - go test -v tests/verify_test.go -cover
