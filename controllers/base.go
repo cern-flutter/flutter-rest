@@ -31,17 +31,29 @@ type baseController struct {
 func (this *baseController) Prepare() {
 	var err error
 	var proxyPath string
+	if beego.BConfig.RunMode == "test" {
+		proxyPath = beego.AppConfig.String("proxy")
+	}
 	if proxyPath == "" {
 		proxyPath = getProxyPath()
 	}
 	var p proxy.X509Proxy
 	if err := p.DecodeFromFile(proxyPath); err != nil {
-		beego.Error("Error Decode")
+		beego.Error(err)
 	}
+	current_time := time.Now()
+	date := this.GetString("date")
 
+	if date != "" {
+		current_time, err = beego.DateParse(date, time.UnixDate)
+		beego.Debug(current_time)
+		if err != nil {
+			beego.Error(err)
+		}
+	}
 	verifyOptions := proxy.VerifyOptions{
 		VomsDir:     beego.AppConfig.String("vomsDir"),
-		CurrentTime: time.Now(),
+		CurrentTime: current_time,
 	}
 	capath := beego.AppConfig.String("capath")
 	crls, _ := strconv.ParseBool(beego.AppConfig.String("crls"))
