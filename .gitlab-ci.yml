@@ -6,6 +6,7 @@ test:
       - echo "$GOPATH"
       - mkdir -p "$GOPATH/src/gitlab.cern.ch/flutter"
       - ln -sfv "$(pwd -P)" "$GOPATH/src/gitlab.cern.ch/flutter"
+      - ls "/builds/flutter/flutter-rest"
       - cd "$GOPATH/src/gitlab.cern.ch/flutter/futter-rest"
       - go get -t
       - go test -v tests/verify_test.go -cover
