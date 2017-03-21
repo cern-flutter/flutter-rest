@@ -4,8 +4,8 @@ test:
     script:
       - go vet
       - mkdir -p "$GOPATH/src/gitlab.cern.ch/flutter/flutter-rest"
+      - mkdir -p "$GOPATH/src/gitlab.cern.ch/flutter/flutter-rest/.git"
       - ln -s "/builds/flutter/flutter-rest" "$GOPATH/src/gitlab.cern.ch/flutter/flutter-rest"
-      - ls "$GOPATH/src/gitlab.cern.ch/flutter/flutter-rest"
       - cd "$GOPATH/src/gitlab.cern.ch/flutter/flutter-rest"
       - go get -t -v ./...
       - go test -v tests/verify_test.go -cover
