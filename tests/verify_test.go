@@ -1,7 +1,6 @@
 package test
 
 import (
-	_ "flutter-rest/routers"
 	"net/http"
 	"net/http/httptest"
 	"path/filepath"
@@ -36,18 +35,15 @@ func init() {
 func TestProxyValid(t *testing.T) {
 
 	req, err := http.NewRequest("GET", "/", nil)
+
 	if err != nil {
-		beego.Error(err)
+		t.Fatal(err)
 	}
 	w := httptest.NewRecorder()
-
-	date := beego.Date(time.Date(2016, 05, 18, 12, 37, 30, 0, gmt), time.UnixDate)
-
-	ctx := context.NewContext()
-	ctx.Request = req
-	ctx.Input.Reset(ctx)
-	ctx.Output.Reset(ctx)
-	ctx.Input.SetParam("date", date)
+	ctx := req.Context()
+	//date := beego.Date(time.Date(2016, 05, 18, 12, 37, 30, 0, gmt), time.UnixDate)
+	ctx = context.WithValue(ctx, "date", "hola")
+	req.WithContext(ctx)
 	beego.BeeApp.Handlers.ServeHTTP(w, req)
 
 	beego.Trace("testing", "TestProxyValid", "Code[%d]\n%s", w.Code, w.Body.String())
