@@ -1,8 +1,9 @@
 package main
 
 import (
-	_ "flutter-rest/routers"
 	"fmt"
+
+	_ "gitlab.cern.ch/flutter/flutter-rest/routers"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"

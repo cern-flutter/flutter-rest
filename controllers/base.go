@@ -42,8 +42,9 @@ func (this *baseController) Prepare() {
 		beego.Error(err)
 	}
 	current_time := time.Now()
-	date := this.GetString("date")
-
+	date := this.Input().Get("date")
+	//date := this.GetString("date")
+	beego.Debug(date)
 	if date != "" {
 		current_time, err = beego.DateParse(date, time.UnixDate)
 		beego.Debug(current_time)

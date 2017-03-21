@@ -1,8 +1,9 @@
 package controllers
 
 import (
-	models "flutter-rest/models"
 	"fmt"
+
+	models "gitlab.cern.ch/flutter/flutter-rest/models"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
