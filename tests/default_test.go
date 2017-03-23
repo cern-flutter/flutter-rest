@@ -21,6 +21,7 @@ func init() {
 func TestBeego(t *testing.T) {
 	r, _ := http.NewRequest("GET", "/", nil)
 	w := httptest.NewRecorder()
+
 	beego.BeeApp.Handlers.ServeHTTP(w, r)
 
 	beego.Trace("testing", "TestBeego", "Code[%d]\n%s", w.Code, w.Body.String())

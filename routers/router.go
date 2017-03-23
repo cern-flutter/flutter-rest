@@ -6,6 +6,7 @@ import (
 )
 
 func init() {
+	beego.Debug("Router")
 	beego.Router("/", &controllers.MainController{})
 	beego.Router("/hello-world", &controllers.MainController{}, "get:HelloSitepoint")
 }
