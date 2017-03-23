@@ -3,4 +3,8 @@ image: golang:1.7
 test:
     script:
       - go vet
+      - GODIR=$GOPATH/src/gitlab.cern.ch/flutter/flutter-rest
+      - mkdir -p "$(dirname "$GODIR")"      
+      - ln -sfv "$(pwd -P)" "${GODIR}"       
+      - cd "${GODIR}"
       - go test -v tests/verify_test.go -cover
